@@ -1,0 +1,192 @@
+unit umain;
+
+{$mode delphi}
+
+interface
+
+uses
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  ExtCtrls, ComCtrls, Buttons, ActnList, ButtonPanel, BCPanel, BCToolBar,
+  BCButton, BGRASpeedButton, BCImageButton, BCGameGrid, BCButtonFocus,
+  fontawesomecodes, ECEditBtns, JButton;
+
+{ TForm1 }
+
+type
+  TForm1 = class(TForm)
+    act_Execute: TAction;
+    ActionList1: TActionList;
+    BCButtonFocus1: TBCButtonFocus;
+    BCToolBar1: TBCToolBar;
+    Bevel1: TBevel;
+    Bevel2: TBevel;
+    Bevel3: TBevel;
+    Bevel4: TBevel;
+    Bevel5: TBevel;
+    Bevel6: TBevel;
+    ECSpeedBtn1: TECSpeedBtn;
+    ImageList_White: TImageList;
+    ImageList_Black: TImageList;
+    Label1: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
+    Label19: TLabel;
+    Label2: TLabel;
+    Label20: TLabel;
+    Label21: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    Label25: TLabel;
+    Label26: TLabel;
+    Label27: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Panel1: TPanel;
+    Panel10: TPanel;
+    Panel11: TPanel;
+    Panel12: TPanel;
+    Panel13: TPanel;
+    Panel14: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    Panel7: TPanel;
+    Panel8: TPanel;
+    Panel9: TPanel;
+    SpeedButton1: TSpeedButton;
+    ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
+    ToolButton10: TToolButton;
+    ToolButton11: TToolButton;
+    ToolButton12: TToolButton;
+    ToolButton13: TToolButton;
+    ToolButton14: TToolButton;
+    ToolButton15: TToolButton;
+    ToolButton16: TToolButton;
+    ToolButton17: TToolButton;
+    ToolButton18: TToolButton;
+    ToolButton19: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton20: TToolButton;
+    ToolButton3: TToolButton;
+    ToolButton4: TToolButton;
+    ToolButton5: TToolButton;
+    ToolButton6: TToolButton;
+    ToolButton7: TToolButton;
+    ToolButton8: TToolButton;
+    ToolButton9: TToolButton;
+    procedure act_ExecuteExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Label21Click(Sender: TObject);
+    procedure Label27MouseEnter(Sender: TObject);
+    procedure Label27MouseLeave(Sender: TObject);
+    procedure Label5MouseEnter(Sender: TObject);
+    procedure Label5MouseLeave(Sender: TObject);
+    procedure ToolButton6Click(Sender: TObject);
+  private
+    { private declarations }
+  public
+    { public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.lfm}
+
+uses uDialog, upreview;
+
+{ TForm1 }
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  Label5.Caption := WideChar(fa_file_o);
+  Label7.Caption := WideChar(fa_folder_open_o);
+  Label9.Caption := WideChar(fa_upload);
+  Label11.Caption := WideChar(fa_save);
+  Label15.Caption := WideChar(fa_download);
+  Label13.Caption := WideChar(fa_cut);
+  Label17.Caption := WideChar(fa_copy);
+  Label19.Caption := WideChar(fa_paste);
+  Label21.Caption := WideChar(fa_play);
+  Label23.Caption := WideChar(fa_undo);
+  Label25.Caption := WideChar(fa_repeat);
+
+  Label27.Caption := WideChar(fa_file_o)+UTF8Encode(#13#10#13#10'Neu');;
+end;
+
+procedure TForm1.act_ExecuteExecute(Sender: TObject);
+begin
+  upreview.Form2.Showmodal;
+end;
+
+procedure TForm1.Label21Click(Sender: TObject);
+begin
+  act_ExecuteExecute(Sender);
+end;
+
+procedure TForm1.Label27MouseEnter(Sender: TObject);
+begin
+  Label27.Color:=clActiveCaption;
+
+end;
+
+procedure TForm1.Label27MouseLeave(Sender: TObject);
+begin
+  Label27.Color:=TPanel(Label27.Parent).Color;
+end;
+
+
+procedure TForm1.Label5MouseEnter(Sender: TObject);
+var i : integer;
+begin
+  if TLabel(Sender).Parent is TPanel then
+     TPanel(TLabel(Sender).Parent).color := clGray;
+//     TPanel(TLabel(Sender).Parent).BevelOuter := bvLowered;
+  for i := 0 to TPanel(TLabel(Sender).Parent).ControlCount - 1 do
+  begin
+    if TPanel(TLabel(Sender).Parent).Controls[i] is TLabel then
+       TLabel(TPanel(TLabel(Sender).Parent).Controls[i]).Font.Style := [fsBold];
+//    TLabel(TPanel(TLabel(Sender).Parent).Controls[i]).Font.Color := $00FF8000;
+  end;
+end;
+
+procedure TForm1.Label5MouseLeave(Sender: TObject);
+var i : integer;
+begin
+  if TLabel(Sender).Parent is TPanel then
+     TPanel(TLabel(Sender).Parent).color := clBlack;
+//  TPanel(TLabel(Sender).Parent).BevelOuter  := bvNone;
+  for i := 0 to TPanel(TLabel(Sender).Parent).ControlCount - 1 do
+  begin
+    if TPanel(TLabel(Sender).Parent).Controls[i] is TLabel then
+       TLabel(TPanel(TLabel(Sender).Parent).Controls[i]).Font.Style := [];
+//    TLabel(TPanel(TLabel(Sender).Parent).Controls[i]).Font.Color := clWhite;
+  end;
+
+end;
+
+procedure TForm1.ToolButton6Click(Sender: TObject);
+begin
+  ShowMessage((Sender as TToolButton).Caption);
+end;
+
+end.
+

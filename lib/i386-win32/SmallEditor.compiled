@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Compiler Value="C:\Development1\FreePascal\fpc\bin\i386-win32\fpc.exe" Date="1211271188"/>
+  <Params Value=" -MObjFPC -Scghi -O1 -g -gl -WG -l -vewnhibq -FiD:\Lazarusprojekte\SmallEditor\lib\i386-win32 -FuD:\Lazarusprojekte\common -FuD:\LazarusPackages\ecc_0-9-6-10_16-06-15\EC_Controls\lib\i386-win32 -FuD:\LazarusPackages\bgracontrols-master\lib\i386-win32\3.1.1 -FuC:\Development1\FreePascal\lazarus\components\ideintf\units\i386-win32\win32 -FuC:\Development1\FreePascal\lazarus\components\PascalScript\Source\lib\i386-win32 -FuC:\Development1\FreePascal\lazarus\components\lazcontrols\lib\i386-win32\win32 -FuD:\LazarusPackages\jujiboutils\lib\i386-win32 -FuD:\LazarusPackages\lazpaint-master\bgrabitmap\lib\i386-win32\3.1.1 -FuC:\Development1\FreePascal\lazarus\lcl\units\i386-win32\win32 -FuC:\Development1\FreePascal\lazarus\lcl\units\i386-win32 -FuC:\Development1\FreePascal\lazarus\components\lazutils\lib\i386-win32 -FuC:\Development1\FreePascal\lazarus\packager\units\i386-win32 -FuD:\Lazarusprojekte\SmallEditor\ -FUD:\Lazarusprojekte\SmallEditor\lib\i386-win32\ -dLCL -dLCLwin32 SmallEditor.lpr"/>
+</CONFIG>
