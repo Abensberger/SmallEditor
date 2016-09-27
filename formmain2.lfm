@@ -453,7 +453,7 @@ object frmMain: TfrmMain
         Width = 164
         Align = alBottom
         Alignment = taCenter
-        Caption = 'Web'
+        Caption = 'Weber'
         Color = clMenu
         ParentColor = False
         Transparent = False
