@@ -45,13 +45,25 @@ type
     Label29: TLabel;
     Label3: TLabel;
     Label30: TLabel;
+    Label31: TLabel;
+    Label32: TLabel;
+    Label33: TLabel;
+    Label34: TLabel;
+    Label35: TLabel;
+    Label36: TLabel;
+    Label37: TLabel;
+    Label38: TLabel;
+    Label39: TLabel;
     Label4: TLabel;
+    Label40: TLabel;
+    Label41: TLabel;
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
     Panel1: TPanel;
+    Panel10: TPanel;
     Panel7: TPanel;
     Panel9: TPanel;
     pnlEinfuegen: TPanel;
@@ -71,9 +83,11 @@ type
     Panel5: TPanel;
     Panel6: TPanel;
     Panel8: TPanel;
+    ToolBar1: TToolBar;
     procedure act_ExecuteExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Label21Click(Sender: TObject);
+    procedure Label31MouseEnter(Sender: TObject);
     procedure Label5MouseEnter(Sender: TObject);
     procedure Label5MouseLeave(Sender: TObject);
     procedure ToolButton6Click(Sender: TObject);
@@ -109,6 +123,20 @@ begin
   Label25.Caption := WideChar(fa_repeat);
 
 //  Label27.Caption := WideChar(fa_file_o)+UTF8Encode(#13#10#13#10'Neu');;
+//  Speedbutton4.Caption := 'Speichern'+#13#10+'unter...';
+
+  Label31.Caption := WideChar(fa_file_o);
+  Label32.Caption := WideChar(fa_folder_open_o);
+  Label33.Caption := WideChar(fa_upload);
+  Label34.Caption := WideChar(fa_save);
+  Label35.Caption := WideChar(fa_download);
+  Label36.Caption := WideChar(fa_cut);
+  Label37.Caption := WideChar(fa_copy);
+  Label38.Caption := WideChar(fa_paste);
+  Label39.Caption := WideChar(fa_play);
+  Label40.Caption := WideChar(fa_undo);
+  Label41.Caption := WideChar(fa_repeat);
+
 end;
 
 procedure TfrmMain.act_ExecuteExecute(Sender: TObject);
@@ -121,11 +149,18 @@ begin
   act_ExecuteExecute(Sender);
 end;
 
+procedure TfrmMain.Label31MouseEnter(Sender: TObject);
+begin
+
+end;
+
 procedure TfrmMain.Label5MouseEnter(Sender: TObject);
 var i : integer;
 begin
-  if TLabel(Sender).Parent is TPanel then
-     TPanel(TLabel(Sender).Parent).color := clGray;
+  if Sender is TLabel then
+     TLabel(Sender).Color := clGray;
+//  if TLabel(Sender).Parent is TPanel then
+//     TPanel(TLabel(Sender).Parent).color := clGray;
 //     TPanel(TLabel(Sender).Parent).BevelOuter := bvLowered;
 {  for i := 0 to TPanel(TLabel(Sender).Parent).ControlCount - 1 do
   begin
@@ -138,8 +173,10 @@ begin
 procedure TfrmMain.Label5MouseLeave(Sender: TObject);
 var i : integer;
 begin
-  if TLabel(Sender).Parent is TPanel then
-     TPanel(TLabel(Sender).Parent).color := clBlack;
+  if Sender is TLabel then
+     TLabel(Sender).Color := Panel10.Color;
+//  if TLabel(Sender).Parent is TPanel then
+//     TPanel(TLabel(Sender).Parent).color := clBlack;
 //  TPanel(TLabel(Sender).Parent).BevelOuter  := bvNone;
 {  for i := 0 to TPanel(TLabel(Sender).Parent).ControlCount - 1 do
   begin
