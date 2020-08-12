@@ -5,22 +5,29 @@ unit formmain;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ExtCtrls, ComCtrls, Buttons, ActnList,
-  fontawesomecodes;
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
+  StdCtrls, BCPanel, Types, lcltype;
+
 
 { TfrmMain }
 
 type
   TfrmMain = class(TForm)
-    act_Execute: TAction;
-    ActionList1: TActionList;
-    Bevel1: TBevel;
-    Bevel2: TBevel;
-    Bevel3: TBevel;
-    Bevel4: TBevel;
-    Bevel5: TBevel;
-    Bevel6: TBevel;
+    BCPanel1: TBCPanel;
+    chkRahmen: TCheckBox;
+    ComboBox1: TComboBox;
+    Image1: TImage;
+    Image10: TImage;
+    Image11: TImage;
+    Image12: TImage;
+    Image2: TImage;
+    Image3: TImage;
+    Image4: TImage;
+    Image5: TImage;
+    Image6: TImage;
+    Image7: TImage;
+    Image8: TImage;
+    Image9: TImage;
     ImageList_White: TImageList;
     ImageList_Black: TImageList;
     Label1: TLabel;
@@ -32,16 +39,7 @@ type
     Label15: TLabel;
     Label16: TLabel;
     Label17: TLabel;
-    Label18: TLabel;
-    Label19: TLabel;
     Label2: TLabel;
-    Label20: TLabel;
-    Label21: TLabel;
-    Label22: TLabel;
-    Label23: TLabel;
-    Label24: TLabel;
-    Label25: TLabel;
-    Label26: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
@@ -62,12 +60,13 @@ type
     Panel7: TPanel;
     Panel8: TPanel;
     Panel9: TPanel;
-    procedure act_ExecuteExecute(Sender: TObject);
+    procedure chkRahmenChange(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
+    procedure ComboBox1DrawItem(Control: TWinControl; Index: Integer;
+      ARect: TRect; State: TOwnerDrawState);
     procedure FormCreate(Sender: TObject);
-    procedure Label21Click(Sender: TObject);
-    procedure Label5MouseEnter(Sender: TObject);
-    procedure Label5MouseLeave(Sender: TObject);
-    procedure ToolButton6Click(Sender: TObject);
+    procedure Panel2MouseEnter(Sender: TObject);
+    procedure Panel2MouseLeave(Sender: TObject);
   private
     { private declarations }
   public
@@ -81,69 +80,126 @@ implementation
 
 {$R *.lfm}
 
-uses uDialog, upreview;
+const
+FarbArray : array [0..15] of TColor = (clBlack,clMaroon, clGreen, clOlive,
+                                      clNavy, clPurple, clTeal, clGray,
+                                      clSilver, clRed, clLime, clYellow,
+                                      clBlue, clFuchsia, clAqua, clWhite);
+
 
 { TfrmMain }
 
+procedure TfrmMain.Panel2MouseEnter(Sender: TObject);
+var i : integer;
+  aControl : TWinControl;
+begin
+  if Sender is TPanel then
+  begin
+    aControl := TPanel(Sender);
+  end
+  else if TWincontrol(Sender).Parent is TPanel then
+  begin
+    aControl := TPanel(TWincontrol(Sender).Parent);
+  end;
+
+  TPanel(aControl).ParentColor := False;
+  aControl.Color := clGradientActiveCaption;
+
+  for i := 0 to aControl.ControlCount -1 do
+  begin
+    if aControl.Controls[i] is TImage then
+       ImageList_Black.GetBitmap(TImage(aControl.Controls[i]).Tag,
+                                 TImage(aControl.Controls[i]).Picture.Bitmap)
+    else if aControl.Controls[i] is TLabel then
+    begin
+      TLabel(aControl.Controls[i]).Font.Color := clBlack;
+    end;
+  end;
+end;
+
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
-  Label5.Caption := WideChar(fa_file_o);
-  Label7.Caption := WideChar(fa_folder_open_o);
-  Label9.Caption := WideChar(fa_upload);
-  Label11.Caption := WideChar(fa_save);
-  Label15.Caption := WideChar(fa_download);
-  Label13.Caption := WideChar(fa_cut);
-  Label17.Caption := WideChar(fa_copy);
-  Label19.Caption := WideChar(fa_paste);
-  Label21.Caption := WideChar(fa_play);
-  Label23.Caption := WideChar(fa_undo);
-  Label25.Caption := WideChar(fa_repeat);
-
-//  Label27.Caption := WideChar(fa_file_o)+UTF8Encode(#13#10#13#10'Neu');;
+  Panel1.Color := clBlack;
+//  Panel1.Brush.Style := bsClear;
+  Label6.Caption := 'Speichern'+#10+'unter...';
 end;
 
-procedure TfrmMain.act_ExecuteExecute(Sender: TObject);
+procedure TfrmMain.chkRahmenChange(Sender: TObject);
+var
+  i : integer;
 begin
-  upreview.Form2.Showmodal;
-end;
-
-procedure TfrmMain.Label21Click(Sender: TObject);
-begin
-  act_ExecuteExecute(Sender);
-end;
-
-procedure TfrmMain.Label5MouseEnter(Sender: TObject);
-var i : integer;
-begin
-  if TLabel(Sender).Parent is TPanel then
-     TPanel(TLabel(Sender).Parent).color := clGray;
-//     TPanel(TLabel(Sender).Parent).BevelOuter := bvLowered;
-  for i := 0 to TPanel(TLabel(Sender).Parent).ControlCount - 1 do
+  for i := 0 to Panel1.ControlCount -1 do
   begin
-    if TPanel(TLabel(Sender).Parent).Controls[i] is TLabel then
-       TLabel(TPanel(TLabel(Sender).Parent).Controls[i]).Font.Style := [fsBold];
-//    TLabel(TPanel(TLabel(Sender).Parent).Controls[i]).Font.Color := $00FF8000;
+    if Panel1.Controls[i] is TPanel then
+       if chkRahmen.Checked then
+       begin
+         TPanel(Panel1.Controls[i]).BorderStyle := bsSingle;
+       end
+       else
+          TPanel(Panel1.Controls[i]).BorderStyle := bsNone
   end;
 end;
 
-procedure TfrmMain.Label5MouseLeave(Sender: TObject);
-var i : integer;
+procedure TfrmMain.ComboBox1Change(Sender: TObject);
 begin
-  if TLabel(Sender).Parent is TPanel then
-     TPanel(TLabel(Sender).Parent).color := clBlack;
-//  TPanel(TLabel(Sender).Parent).BevelOuter  := bvNone;
-  for i := 0 to TPanel(TLabel(Sender).Parent).ControlCount - 1 do
-  begin
-    if TPanel(TLabel(Sender).Parent).Controls[i] is TLabel then
-       TLabel(TPanel(TLabel(Sender).Parent).Controls[i]).Font.Style := [];
-//    TLabel(TPanel(TLabel(Sender).Parent).Controls[i]).Font.Color := clWhite;
-  end;
-
+  Panel1.Color := FarbArray[TComboBox(Sender).ItemIndex];
 end;
 
-procedure TfrmMain.ToolButton6Click(Sender: TObject);
+procedure TfrmMain.ComboBox1DrawItem(Control: TWinControl; Index: Integer;
+  ARect: TRect; State: TOwnerDrawState);
+const
+  cBrushColors: array [Boolean] of TColor = (clWindow, clHighlight);
+  cPenColors: array [Boolean] of TColor = (clWindowText, clHighlightText);
 begin
-  ShowMessage((Sender as TToolButton).Caption);
+  Assert(Control is TCombobox);
+
+  with (Control as TComboBox).Canvas do
+  begin
+    // Hintergrund und Text Farbe bestimmen, anschließend den Hintergrund löschen
+    Brush.Color := cBrushColors[(OdSelected in State) or (OdFocused in State)];
+    Font.Color := cPenColors[(OdSelected in State) or (OdFocused in State)];
+    FillRect(ARect);
+
+    ARect.Right := 30;
+    Textout(ARect.Right + 5, ARect.Top + 1, (Control as TComboBox).Items[Index]);
+
+    // Jetzt gleichen wir das Rect für die Farbbox an
+    // und anschließend zeichen wir diese ...
+    InflateRect(ARect, 0, -2);
+    OffsetRect(ARect, 2, 0);
+    Brush.Style := bsClear;
+    Brush.Color := FarbArray[Index];
+    Rectangle(ARect);
+  end;
+end;
+
+procedure TfrmMain.Panel2MouseLeave(Sender: TObject);
+var i : integer;
+    aControl : TWinControl;
+begin
+  if Sender is TPanel then
+  begin
+    aControl := TPanel(Sender);
+  end
+  else if TWincontrol(Sender).Parent is TPanel then
+  begin
+    aControl := TPanel(TWincontrol(Sender).Parent);
+  end;
+
+  TPanel(aControl).ParentColor := True;
+//  aControl.Color := TPanel(aControl.Parent).Color;
+
+  for i := 0 to aControl.ControlCount -1 do
+  begin
+    if aControl.Controls[i] is TImage then
+       ImageList_White.GetBitmap(TImage(aControl.Controls[i]).Tag,
+                                 TImage(aControl.Controls[i]).Picture.Bitmap)
+    else if aControl.Controls[i] is TLabel then
+    begin
+      TLabel(aControl.Controls[i]).Font.Color := clWhite;
+    end;
+  end;
+
 end;
 
 end.
